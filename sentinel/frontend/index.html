@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SENTINEL-TS · Hybrid Anomaly Intelligence</title>
+<meta name="description" content="Hybrid time-series forecasting and anomaly detection for cloud infrastructure telemetry." />
+<link rel="stylesheet" href="/static/styles.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' fill='none' stroke='%235eead4' stroke-width='3'/><path d='M4 18l6-7 5 6 4-9 9 10' fill='none' stroke='%23a78bfa' stroke-width='2.4'/></svg>" />
+</head>
+<body>
+
+<!-- ================================================================= boot -->
+<div id="boot">
+  <div class="boot-inner">
+    <div class="boot-mark">
+      <svg class="boot-glyph" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="20" stroke="url(#bg1)" stroke-width="2.5"/>
+        <circle cx="24" cy="24" r="12" stroke="#a78bfa" stroke-width="1.6" opacity="0.6"/>
+        <circle cx="24" cy="24" r="3.4" fill="#5eead4"/>
+        <defs><linearGradient id="bg1" x1="0" y1="0" x2="48" y2="48">
+          <stop stop-color="#5eead4"/><stop offset="1" stop-color="#a78bfa"/>
+        </linearGradient></defs>
+      </svg>
+      <div>
+        <h1 class="boot-title">SENTINEL&#8209;TS</h1>
+        <p class="boot-sub">HYBRID ANOMALY INTELLIGENCE</p>
+      </div>
+    </div>
+    <div class="boot-lines" id="bootLines"></div>
+    <div class="boot-bar"><i></i></div>
+  </div>
+</div>
+
+<!-- ============================================================= ambient -->
+<div class="ambient" aria-hidden="true">
+  <div class="aurora aurora-1"></div>
+  <div class="aurora aurora-2"></div>
+  <div class="aurora aurora-3"></div>
+  <div class="grid-overlay"></div>
+  <div class="scanline"></div>
+</div>
+
+<div class="shell">
+
+  <!-- =========================================================== rail -->
+  <aside class="rail" id="rail">
+    <div class="brand">
+      <svg viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="20" stroke="url(#g1)" stroke-width="2.5"/>
+        <circle cx="24" cy="24" r="12" stroke="#a78bfa" stroke-width="1.6" opacity="0.55"/>
+        <circle cx="24" cy="24" r="3.4" fill="#5eead4"/>
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="48" y2="48">
+          <stop stop-color="#5eead4"/><stop offset="1" stop-color="#a78bfa"/>
+        </linearGradient></defs>
+      </svg>
+      <div>
+        <div class="brand-name">SENTINEL&#8209;TS</div>
+        <div class="brand-tag">anomaly intelligence</div>
+      </div>
+    </div>
+
+    <div class="nav-label">Operate</div>
+    <div class="nav-item active" data-view="control">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="12" r="2"/><circle cx="14" cy="18" r="2"/></svg>
+      Mission Control
+    </div>
+    <div class="nav-item" data-view="overview">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 15l5-6 4 4 4-7 5 9"/><path d="M3 20h18"/></svg>
+      Overview
+    </div>
+
+    <div class="nav-label">Analyse</div>
+    <div class="nav-item" data-view="eda">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      Data &amp; EDA
+    </div>
+    <div class="nav-item" data-view="models">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9M10 19V4M16 19v-7M22 19v-3"/></svg>
+      Model Comparison
+    </div>
+    <div class="nav-item" data-view="detection">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      Detection
+    </div>
+
+    <div class="nav-label">Act</div>
+    <div class="nav-item" data-view="alerts">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a6 6 0 0 0-6 6c0 5-2 6-2 6h16s-2-1-2-6a6 6 0 0 0-6-6z"/><path d="M10.5 20a2 2 0 0 0 3 0"/></svg>
+      Alerts
+      <span class="badge" id="alertBadge" style="display:none">0</span>
+    </div>
+    <div class="nav-item" data-view="benchmark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18"/><path d="M5 8l7-5 7 5"/><circle cx="5" cy="14" r="3"/><circle cx="19" cy="14" r="3"/></svg>
+      Fleet Benchmark
+    </div>
+    <div class="nav-item" data-view="about">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/></svg>
+      Method
+    </div>
+
+    <div class="rail-foot">
+      <div class="rail-stat"><span>Engine</span><b id="railVersion">—</b></div>
+      <div class="rail-stat"><span>Models</span><b id="railModels">—</b></div>
+      <div class="rail-stat"><span>Datasets</span><b id="railDatasets">—</b></div>
+      <div class="rail-stat"><span>Last run</span><b id="railRuntime">—</b></div>
+    </div>
+  </aside>
+
+  <!-- =========================================================== main -->
+  <main class="main" id="main">
+    <header class="topbar">
+      <div class="status-dot" id="statusDot"></div>
+      <div>
+        <h1 id="pageTitle">Mission Control</h1>
+        <div class="sub" id="pageSub">Configure and launch an analysis run</div>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn ghost sm" id="exportBtn" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12"/><path d="M8 11l4 4 4-4"/><path d="M4 21h16"/></svg>
+        Export JSON
+      </button>
+      <button class="btn primary" id="runBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4l14 8-14 8z"/></svg>
+        <span id="runBtnLabel">Run analysis</span>
+      </button>
+    </header>
+
+    <!-- ===================================================== control -->
+    <section class="view active" id="view-control">
+      <div class="grid g-12 stagger">
+
+        <!-- configuration -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="card">
+            <div class="card-head">
+              <h2 class="card-title">Telemetry source</h2>
+            </div>
+            <div class="ds-list" id="dsList">
+              <div class="skel" style="height:56px"></div>
+              <div class="skel" style="height:56px"></div>
+              <div class="skel" style="height:56px"></div>
+            </div>
+            <div class="divider"></div>
+            <label class="btn ghost sm" style="width:100%" for="uploadInput">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 19V7"/><path d="M8 11l4-4 4 4"/><path d="M4 21h16"/></svg>
+              Upload your own CSV
+            </label>
+            <input type="file" id="uploadInput" accept=".csv,text/csv" hidden />
+            <p class="hint dim" style="margin:8px 0 0;font-size:11px">
+              Two columns: a timestamp and a numeric value. Column names are
+              detected automatically.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h2 class="card-title">Analysis parameters</h2></div>
+            <div class="grid g-2" style="gap:14px">
+              <div class="field">
+                <label for="freqSel">Resample to</label>
+                <select id="freqSel">
+                  <option value="5min">5 minutes (native)</option>
+                  <option value="10min">10 minutes</option>
+                  <option value="15min" selected>15 minutes</option>
+                  <option value="30min">30 minutes</option>
+                  <option value="1h">1 hour</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="testSize">Hold-out <b class="mono" id="testSizeVal">30%</b></label>
+                <input type="range" id="testSize" min="10" max="60" step="5" value="30" />
+              </div>
+              <div class="field">
+                <label for="sigma">Alert threshold <b class="mono" id="sigmaVal">3.5σ</b></label>
+                <input type="range" id="sigma" min="1.5" max="7" step="0.1" value="3.5" />
+              </div>
+              <div class="field">
+                <label for="contam">Contamination <b class="mono" id="contamVal">3.0%</b></label>
+                <input type="range" id="contam" min="0.5" max="15" step="0.5" value="3" />
+              </div>
+              <div class="field">
+                <label for="fourierK">Fourier harmonics <b class="mono" id="fourierVal">4</b></label>
+                <input type="range" id="fourierK" min="1" max="8" step="1" value="4" />
+              </div>
+              <div class="field">
+                <label for="horizon">Forecast horizon <b class="mono" id="horizonVal">96</b></label>
+                <input type="range" id="horizon" min="12" max="288" step="12" value="96" />
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="field">
+              <label>Models to compare</label>
+              <div id="modelToggles" style="display:flex;flex-direction:column;gap:2px"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- run status + preview -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="card" id="runCard">
+            <div class="card-head">
+              <h2 class="card-title">Run status</h2>
+              <div class="spacer"></div>
+              <span class="chip" id="runChip">idle</span>
+            </div>
+            <div class="pipeline" id="pipeline"></div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="flex" style="justify-content:space-between;font-size:11px;color:var(--text-faint)">
+              <span id="stageText">Waiting for launch</span>
+              <span class="mono" id="progressText">0%</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h2 class="card-title">Selected series</h2>
+              <div class="spacer"></div>
+              <span class="card-sub" id="previewMeta"></span>
+            </div>
+            <div id="previewChart" style="height:230px"></div>
+            <div class="legend" id="previewLegend"></div>
+          </div>
+
+          <div class="card" id="dsInfoCard">
+            <div class="card-head"><h2 class="card-title">Dataset provenance</h2></div>
+            <div class="kv" id="dsInfo"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== overview -->
+    <section class="view" id="view-overview">
+      <div id="overviewBody">
+        <div class="empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 15l5-6 4 4 4-7 5 9"/><path d="M3 20h18"/></svg>
+          <div>No analysis yet. Launch a run from Mission Control.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= eda -->
+    <section class="view" id="view-eda">
+      <div id="edaBody">
+        <div class="empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          <div>Exploratory analysis appears here after a run.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================== models -->
+    <section class="view" id="view-models">
+      <div id="modelsBody">
+        <div class="empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19V9M10 19V4M16 19v-7M22 19v-3"/></svg>
+          <div>The model leaderboard appears here after a run.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================== detection -->
+    <section class="view" id="view-detection">
+      <div id="detectionBody">
+        <div class="empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <div>Detection diagnostics appear here after a run.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================== alerts -->
+    <section class="view" id="view-alerts">
+      <div id="alertsBody">
+        <div class="empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3a6 6 0 0 0-6 6c0 5-2 6-2 6h16s-2-1-2-6a6 6 0 0 0-6-6z"/></svg>
+          <div>Incidents and recommended actions appear here after a run.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================== benchmark -->
+    <section class="view" id="view-benchmark">
+      <div class="card mb-10">
+        <div class="card-head">
+          <h2 class="card-title">Fleet benchmark</h2>
+          <div class="spacer"></div>
+          <button class="btn primary sm" id="benchBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4l14 8-14 8z"/></svg>
+            Run across all labelled services
+          </button>
+        </div>
+        <p class="prose" style="margin:0">
+          A single service carries only one or two labelled incident windows in
+          its hold-out, which is too thin to rank detectors on. This runs the
+          identical pipeline across every labelled service and aggregates two
+          ways — a macro average that weights each service equally, and pooled
+          counts that weight each observation equally. Where the two disagree,
+          no model dominates, and the summary says so.
+        </p>
+        <div class="progress-track" id="benchTrack" style="display:none"><div class="progress-fill" id="benchFill"></div></div>
+        <div class="flex" style="justify-content:space-between;font-size:11px;color:var(--text-faint)">
+          <span id="benchStage"></span><span class="mono" id="benchPct"></span>
+        </div>
+      </div>
+      <div id="benchBody"></div>
+    </section>
+
+    <!-- ======================================================= about -->
+    <section class="view" id="view-about">
+      <div class="grid g-2 stagger">
+        <div class="card">
+          <div class="card-head"><h2 class="card-title">The problem</h2></div>
+          <div class="prose">
+            <p>Cloud services emit a continuous stream of telemetry — CPU, memory,
+            network, request counts, disk throughput. Incidents announce
+            themselves in that stream before customers notice, but almost
+            always at a scale and shape that fixed thresholds miss.</p>
+            <p>The failure mode is specific and expensive. A static ceiling
+            calibrated for peak hours is blind to an outage at 04:00 when load
+            legitimately collapses; one calibrated for the trough pages every
+            single weekday morning. Teams respond by widening thresholds until
+            the alerts stop, at which point the detector has an effective
+            recall of zero.</p>
+            <p><strong>Intended users:</strong> site-reliability and platform
+            engineers who own service health, and the on-call rota that has to
+            act on whatever the system decides to escalate.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h2 class="card-title">The approach</h2></div>
+          <div class="prose">
+            <p>Model what the metric <em>should</em> be, then alert on the gap —
+            so the threshold moves with time of day instead of ignoring it.</p>
+            <p>The hybrid runs in two stages. SARIMAX with Fourier seasonal
+            regressors captures the linear autocorrelation and the daily cycle.
+            A nonlinear learner is then trained on what that model leaves in its
+            residuals, following Zhang's hybrid decomposition of a series into
+            linear and nonlinear parts. Detection fuses a train-calibrated
+            robust residual z-score with an Isolation Forest over residual
+            <em>shape</em>, then debounces to suppress single-bucket noise.</p>
+            <p>Six approaches are compared on identical splits, including two
+            deliberately simple baselines. If the complexity does not beat them,
+            the leaderboard says so.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h2 class="card-title">Evaluation stance</h2></div>
+          <div class="prose">
+            <p>Forecast accuracy is reported as MAE, RMSE, MAPE, sMAPE and MASE.
+            MASE matters here because byte and request counts legitimately idle
+            near zero, where MAPE is undefined or explodes.</p>
+            <p>Detection is scored point-wise <em>and</em> point-adjusted.
+            Reporting only point-wise F1 flatters detectors that fire
+            constantly; reporting only point-adjusted F1 hides alert fatigue.
+            Both appear, alongside detection latency and false alarms per day —
+            the two numbers that actually decide whether a team leaves an alert
+            switched on.</p>
+            <p>The composite ranking weights point-adjusted F1 at 0.45, segment
+            recall 0.25, point-wise F1 0.15, latency 0.10 and alert burden 0.05.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h2 class="card-title">Data and honesty</h2></div>
+          <div class="prose">
+            <p>The bundled corpus is the <strong>realAWSCloudwatch</strong> family
+            of the Numenta Anomaly Benchmark: genuine Amazon CloudWatch server
+            telemetry at five-minute resolution over roughly two weeks per
+            series, with human-curated anomaly <em>windows</em> rather than point
+            labels.</p>
+            <p>Window labels are generous by design — they open before the visible
+            excursion so that early detection is rewarded. That inflates measured
+            detection latency relative to what an operator would perceive, and
+            the figures here are not adjusted to hide it.</p>
+            <p>Splits are strictly chronological. Thresholds and residual scales
+            are calibrated on training data only, never on the window being
+            judged.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script src="/static/charts.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+SENTINEL-TS — how to run this
+=============================
+
+You need Python 3.9 or newer. Nothing else: no database, no Node, no
+build step, and no internet connection at runtime.
+
+  1. Open a terminal in this folder (the one containing run.py).
+
+  2. Install the dependencies:
+
+         pip install -r requirements.txt
+
+     If "pip" is not found, try "pip3" or "python -m pip".
+
+  3. Check that everything is in place:
+
+         python run.py --check
+
+     You should see every dependency marked [ ok ] and
+     "6 dataset(s) registered and readable."
+
+  4. Start the console:
+
+         python run.py
+
+  5. Open http://127.0.0.1:8000 in a browser.
+
+     Pick a service, press "Run analysis", and wait ~30 seconds.
+
+
+Other things you can do
+-----------------------
+
+  python run.py --port 9000                       use a different port
+  python run.py --cli ec2_cpu_utilization_5f5533  one analysis in the terminal
+  python run.py --benchmark                       all services, aggregated
+  python -m pytest                                the test suite (101 tests)
+
+
+If something goes wrong
+-----------------------
+
+  "ModuleNotFoundError"      -> step 2 did not complete; run it again
+  "Address already in use"   -> python run.py --port 9000
+  "command not found: python"-> try "python3" everywhere instead
+  Console says it cannot
+  reach the analysis engine  -> the API did not start; check the terminal
+
+
+What is in this folder
+----------------------
+
+  run.py             launcher (server, CLI, benchmark, --check)
+  requirements.txt   dependencies
+  README.md          full documentation
+  sentinel/          the analysis engine (Python)
+  frontend/          the console (HTML/CSS/JS, no build step)
+  data/raw/          the six NAB CloudWatch series
+  data/labels/       ground-truth anomaly windows
+  tests/             101 Python tests + a console smoke test
+  docs/              report, synopsis, dataset notes, viva prep,
+                     screenshot checklist
+  artifacts/         saved results from previous runs (JSON)
